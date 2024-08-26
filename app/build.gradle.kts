@@ -28,7 +28,28 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        debug {
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+        }
     }
+
+    flavorDimensions += mutableListOf("version")
+    productFlavors {
+        create("demo") {
+            dimension = flavorDimensions[0]
+            applicationIdSuffix = ".demo"
+            versionNameSuffix = "-demo"
+        }
+
+        create("prod") {
+            dimension = flavorDimensions[0]
+            applicationIdSuffix = ".prod"
+            versionNameSuffix = "-prod"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
