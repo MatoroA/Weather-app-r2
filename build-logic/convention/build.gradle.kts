@@ -17,4 +17,5 @@ kotlin {
 
 dependencies {
     compileOnly(libs.android.tools.common)
+    compileOnly(libs.android.tools.build.gradle)
 }

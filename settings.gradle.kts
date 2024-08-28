@@ -1,4 +1,5 @@
 pluginManagement {
+    // this included build is added on the plugin management bloc, because it defines plugins:
     includeBuild("build-logic")
     repositories {
         google()
