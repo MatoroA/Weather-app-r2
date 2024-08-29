@@ -11,6 +11,8 @@ lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
 composeBom = "2024.04.01"
 jetbrainsKotlinJvm = "1.9.0"
+appcompat = "1.7.0"
+material = "1.12.0"
 
 [libraries]
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidCommon" }
@@ -31,9 +33,12 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 # dependencies of included build
 android-tools-build-gradle = { group = "com.android.tools.build", name ="gradle", version.ref = "androidGradle" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 
