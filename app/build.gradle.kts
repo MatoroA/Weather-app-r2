@@ -1,16 +1,13 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.dvt.weather.android.application)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "dvt.com.weather.assessment"
-    compileSdk = 34
 
     defaultConfig {
         applicationId = "dvt.com.weather.assessment"
-        minSdk = 24
-        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -35,13 +32,6 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
     buildFeatures {
         compose = true
     }

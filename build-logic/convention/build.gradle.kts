@@ -16,6 +16,24 @@ kotlin {
 }
 
 dependencies {
-    compileOnly(libs.android.tools.common)
+//    compileOnly(libs.android.tools.common)
     compileOnly(libs.android.tools.build.gradle)
+    compileOnly(libs.kotlin.gradlePlugin)
+}
+
+gradlePlugin {
+    plugins {
+        register("androidApplication") {
+            id = "dvt.weather.android.application"
+            implementationClass = "AndroidApplicationPluginConvention"
+        }
+        register("androidLibrary") {
+            id = "dvt.weather.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("kotlinJvm") {
+            id = "dvt.weather.kotlin.jvm"
+            implementationClass = "KotlinJvmConventionPlugin"
+        }
+    }
 }

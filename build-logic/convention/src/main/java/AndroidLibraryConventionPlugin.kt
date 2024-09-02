@@ -1,4 +1,5 @@
 import com.android.build.gradle.LibraryExtension
+import dvt.com.weather.convention.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -13,7 +14,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<LibraryExtension> {
-
+                configureKotlinAndroid(this)
             }
         }
     }
