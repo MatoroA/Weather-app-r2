@@ -1,0 +1,200 @@
+{
+  "cod": "200",
+  "message": 0,
+  "cnt": 5,
+  "list": [
+    {
+      "dt": 1725310800,
+      "main": {
+        "temp": 17.24,
+        "feels_like": 16.09,
+        "temp_min": 16.18,
+        "temp_max": 17.24,
+        "pressure": 1027,
+        "sea_level": 1027,
+        "grnd_level": 879,
+        "humidity": 41,
+        "temp_kf": 1.06
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01n"
+        }
+      ],
+      "clouds": {
+        "all": 0
+      },
+      "wind": {
+        "speed": 3.49,
+        "deg": 38,
+        "gust": 8.03
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2024-09-02 21:00:00"
+    },
+    {
+      "dt": 1725321600,
+      "main": {
+        "temp": 16.18,
+        "feels_like": 14.98,
+        "temp_min": 14.06,
+        "temp_max": 16.18,
+        "pressure": 1027,
+        "sea_level": 1027,
+        "grnd_level": 878,
+        "humidity": 43,
+        "temp_kf": 2.12
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01n"
+        }
+      ],
+      "clouds": {
+        "all": 0
+      },
+      "wind": {
+        "speed": 2.66,
+        "deg": 48,
+        "gust": 6.05
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2024-09-03 00:00:00"
+    },
+    {
+      "dt": 1725332400,
+      "main": {
+        "temp": 14.21,
+        "feels_like": 12.97,
+        "temp_min": 12.69,
+        "temp_max": 14.21,
+        "pressure": 1027,
+        "sea_level": 1027,
+        "grnd_level": 878,
+        "humidity": 49,
+        "temp_kf": 1.52
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01n"
+        }
+      ],
+      "clouds": {
+        "all": 0
+      },
+      "wind": {
+        "speed": 1.22,
+        "deg": 52,
+        "gust": 2.81
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2024-09-03 03:00:00"
+    },
+    {
+      "dt": 1725343200,
+      "main": {
+        "temp": 15.85,
+        "feels_like": 14.59,
+        "temp_min": 15.85,
+        "temp_max": 15.85,
+        "pressure": 1028,
+        "sea_level": 1028,
+        "grnd_level": 880,
+        "humidity": 42,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01d"
+        }
+      ],
+      "clouds": {
+        "all": 0
+      },
+      "wind": {
+        "speed": 0.81,
+        "deg": 22,
+        "gust": 0.95
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2024-09-03 06:00:00"
+    },
+    {
+      "dt": 1725354000,
+      "main": {
+        "temp": 21.91,
+        "feels_like": 20.81,
+        "temp_min": 21.91,
+        "temp_max": 21.91,
+        "pressure": 1027,
+        "sea_level": 1027,
+        "grnd_level": 881,
+        "humidity": 25,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01d"
+        }
+      ],
+      "clouds": {
+        "all": 0
+      },
+      "wind": {
+        "speed": 1.72,
+        "deg": 330,
+        "gust": 1.63
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2024-09-03 09:00:00"
+    }
+  ],
+  "city": {
+    "id": 964137,
+    "name": "Pretoria",
+    "coord": {
+      "lat": -25.7449,
+      "lon": 28.1878
+    },
+    "country": "ZA",
+    "population": 1619438,
+    "timezone": 7200,
+    "sunrise": 1725250709,
+    "sunset": 1725292541
+  }
+}
