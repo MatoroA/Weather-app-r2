@@ -1,4 +1,4 @@
-package dvt.com.weather.data
+package dvt.com.weather.data.repository
 
 import dvt.com.weather.model.weather.WeatherForecast
 import dvt.com.weather.network.WeatherLocationParam
