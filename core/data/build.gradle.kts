@@ -14,6 +14,9 @@ android {
 
 dependencies {
     api(projects.core.model)
+    api(projects.core.network)
+
+    implementation(libs.dagger.hilt.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

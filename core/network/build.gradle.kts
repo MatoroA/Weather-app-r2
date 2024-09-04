@@ -14,5 +14,5 @@ android {
 
 dependencies {
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.dagger.hilt.andrroid)
+    implementation(libs.dagger.hilt.android)
 }
