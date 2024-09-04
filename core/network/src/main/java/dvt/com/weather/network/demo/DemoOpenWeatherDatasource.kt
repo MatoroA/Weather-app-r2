@@ -3,7 +3,6 @@ package dvt.com.weather.network.demo
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dvt.com.weather.network.WeatherDataSource
-import dvt.com.weather.network.WeatherLocationParam
 import dvt.com.weather.network.model.NetworkWeatherForecast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,7 +16,7 @@ class DemoOpenWeatherDatasource @Inject constructor(
     private val json: Json,
 ) : WeatherDataSource {
     @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun getWeather(location: WeatherLocationParam): NetworkWeatherForecast =
+    override suspend fun getWeather(longitude: Double, latitude: Double): NetworkWeatherForecast =
         withContext(Dispatchers.IO) {
             context.assets.open(CURRENT_LOCATION).use(json::decodeFromStream)
         }
