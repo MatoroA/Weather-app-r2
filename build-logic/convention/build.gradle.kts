@@ -35,5 +35,9 @@ gradlePlugin {
             id = "dvt.weather.kotlin.jvm"
             implementationClass = "KotlinJvmConventionPlugin"
         }
+        register("androidFeature") {
+            id = "dvt.weather.android.feature"
+            implementationClass = "AndroidFeaturePluginConvention"
+        }
     }
 }

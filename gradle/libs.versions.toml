@@ -60,4 +60,5 @@ devtoopls-ksp = { id = "com.google.devtools.ksp", version.ref = "devTools" }
 dvt-weather-android-application = { id = "dvt.weather.android.application", version = "unspecified" }
 dvt-weather-android-library = { id = "dvt.weather.android.library", version = "unspecified" }
 dvt-weather-kotlin-jvm = { id = "dvt.weather.kotlin.jvm", version = "unspecified" }
+dvt-weather-android-feature = { id = "dvt.weather.android.feature", version = "unspecified" }
 
