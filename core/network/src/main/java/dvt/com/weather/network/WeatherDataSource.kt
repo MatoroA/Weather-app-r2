@@ -13,5 +13,5 @@ data class WeatherLocationParam(
 
 interface WeatherDataSource {
 
-   suspend fun getWeather(location: WeatherLocationParam): Flow<NetworkWeatherForecast>
+    suspend fun getWeather(location: WeatherLocationParam): NetworkWeatherForecast
 }
