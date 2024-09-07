@@ -29,7 +29,7 @@ class AndroidFeaturePluginConvention : Plugin<Project> {
             }
 
             dependencies {
-                val bom = libs.findLibrary("androidx-compose-bom ").get()
+                val bom = libs.findLibrary("androidx.compose.bom").get()
                 add("implementation", platform(bom))
                 add("implementation", libs.findLibrary("androidx.compose.runtime").get())
                 add("implementation", libs.findLibrary("androidx.compose.ui").get())
