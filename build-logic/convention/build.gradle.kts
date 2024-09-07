@@ -39,9 +39,9 @@ gradlePlugin {
             id = "dvt.weather.android.feature"
             implementationClass = "AndroidFeaturePluginConvention"
         }
-        register("hiltPlugin") {
-            id = "dvt.weather.hilt"
-            implementationClass = "HiltConventionPlugin"
+        register("androidHilt") {
+            id = "dvt.weather.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
         }
     }
 }
