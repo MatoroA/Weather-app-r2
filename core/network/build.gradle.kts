@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.dvt.weather.android.library)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.dvt.weather.hilt)
 }
 
 android {
@@ -14,5 +15,4 @@ android {
 
 dependencies {
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.dagger.hilt.android)
 }

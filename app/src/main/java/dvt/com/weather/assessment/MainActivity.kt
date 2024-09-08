@@ -11,8 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import dagger.hilt.android.AndroidEntryPoint
 import dvt.com.weather.assessment.ui.theme.WeatherAppTheme
+import dvt.com.weather.home.HomeRoute
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    HomeRoute(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
