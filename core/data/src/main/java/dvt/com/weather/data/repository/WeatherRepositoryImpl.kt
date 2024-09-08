@@ -35,7 +35,7 @@ class WeatherRepositoryImpl @Inject constructor(
                 temperature = main.temperature,
                 pressure = main.pressure,
                 humidity = main.humidity,
-                seaLeve = main.seaLeve,
+                seaLevel = main.seaLevel,
                 groundLevel = main.groundLevel,
                 feelsLike = main.feelsLike,
             )
