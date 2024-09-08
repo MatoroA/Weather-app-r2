@@ -15,8 +15,8 @@ data class Main(
     val temperatureMax: Double,
     val pressure: Int,
     val humidity: Int,
-    @SerialName("sea_leve")
-    val seaLeve: Int,
-    @SerialName("ground_level")
+    @SerialName("sea_level")
+    val seaLevel: Int,
+    @SerialName("grnd_level")
     val groundLevel: Int,
 )
