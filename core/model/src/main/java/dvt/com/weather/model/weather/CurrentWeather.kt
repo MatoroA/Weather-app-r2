@@ -1,6 +1,6 @@
 package dvt.com.weather.model.weather
 
-data class WeatherForecast(
+data class CurrentWeather(
     val weather: List<Weather>,
     val main: Main,
 )

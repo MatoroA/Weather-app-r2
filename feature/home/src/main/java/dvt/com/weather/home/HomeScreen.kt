@@ -21,7 +21,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
 import dvt.com.weather.model.weather.Main
-import dvt.com.weather.model.weather.WeatherForecast
+import dvt.com.weather.model.weather.CurrentWeather
 
 
 @Composable
@@ -64,7 +64,7 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
                 contentScale = ContentScale.FillBounds,
                 contentDescription = "sunny"
             )
-            Text(text = "Temperature is: ${state.forecast.main.temperature}")
+            Text(text = "Temperature is: ${state.current.main.temperature}")
         }
     }
 }
@@ -75,7 +75,7 @@ private fun HomeWeatherPreview() {
     WeatherTheme {
         HomeWeather(
             state = HomeUiState.Success(
-                forecast = WeatherForecast(
+                current = CurrentWeather(
                     weather = emptyList(),
                     main = Main(
                         temperatureMin = 0.0,
@@ -87,7 +87,9 @@ private fun HomeWeatherPreview() {
                         seaLevel = 0,
                         feelsLike = 0.0
                     )
-                )
+                ),
+                forecasts = emptyList()
+
             )
         )
     }

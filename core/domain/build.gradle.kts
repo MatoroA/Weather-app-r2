@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.dvt.weather.android.library)
+    alias(libs.plugins.dvt.weather.hilt)
 }
 
 android {
@@ -12,4 +13,6 @@ android {
 }
 
 dependencies {
+    api(projects.core.data)
+    api(projects.core.model)
 }

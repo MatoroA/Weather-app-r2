@@ -14,6 +14,7 @@ android {
 dependencies {
     implementation(projects.core.designsystem)
     implementation(projects.core.data)
+    implementation(projects.core.domain)
 
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation("androidx.compose.foundation:foundation:1.7.0")

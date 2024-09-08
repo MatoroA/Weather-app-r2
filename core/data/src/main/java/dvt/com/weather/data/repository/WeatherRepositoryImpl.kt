@@ -3,7 +3,7 @@ package dvt.com.weather.data.repository
 import dvt.com.weather.model.weather.Forecast
 import dvt.com.weather.model.weather.Main
 import dvt.com.weather.model.weather.Weather
-import dvt.com.weather.model.weather.WeatherForecast
+import dvt.com.weather.model.weather.CurrentWeather
 import dvt.com.weather.network.WeatherDataSource
 import dvt.com.weather.network.model.NetworkForecastResponse
 import dvt.com.weather.network.model.NetworkWeatherForecast
@@ -14,14 +14,14 @@ import javax.inject.Inject
 class WeatherRepositoryImpl @Inject constructor(
     private val dataSource: WeatherDataSource,
 ) : WeatherRepository {
-    override fun getWeatherForecast(longitude: Double, latitude: Double): Flow<WeatherForecast> =
+    override fun getCurrentWeather(longitude: Double, latitude: Double): Flow<CurrentWeather> =
         flow {
             emit(
                 dataSource.getWeather(longitude, latitude).toExternalModel()
             )
         }
 
-    override fun getCurrentWeatherForecast(
+    override fun getWeatherForecast(
         longitude: Double,
         latitude: Double,
     ): Flow<List<Forecast>> = flow {
@@ -32,8 +32,8 @@ class WeatherRepositoryImpl @Inject constructor(
 
     }
 
-    private fun NetworkWeatherForecast.toExternalModel(): WeatherForecast {
-        return WeatherForecast(
+    private fun NetworkWeatherForecast.toExternalModel(): CurrentWeather {
+        return CurrentWeather(
             weather = this.weather.map {
                 Weather(
                     id = it.id,
