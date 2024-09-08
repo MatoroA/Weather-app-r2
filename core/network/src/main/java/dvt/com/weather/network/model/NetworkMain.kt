@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Main(
+data class NetworkMain(
     @SerialName("temp")
     val temperature: Double,
     @SerialName("feels_like")

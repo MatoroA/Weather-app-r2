@@ -4,9 +4,8 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class NetworkWeatherForecast(
-    val weather: List<NetworkWeather>,
+data class NetworkForecast(
+    val dt: Long,
     val main: NetworkMain,
-    val visibility: Int,
+    val weather: List<NetworkWeather>
 )
-

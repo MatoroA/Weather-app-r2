@@ -4,6 +4,7 @@ import dvt.com.weather.model.weather.Main
 import dvt.com.weather.model.weather.Weather
 import dvt.com.weather.model.weather.WeatherForecast
 import dvt.com.weather.network.WeatherDataSource
+import dvt.com.weather.network.model.NetworkForecastResponse
 import dvt.com.weather.network.model.NetworkWeatherForecast
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -18,6 +19,14 @@ class WeatherRepositoryImpl @Inject constructor(
                 dataSource.getWeather(longitude, latitude).toExternalModel()
             )
         }
+
+    override fun getCurrentWeatherForecast(
+        longitude: Double,
+        latitude: Double,
+    ): Flow<WeatherForecast> = flow {
+        dataSource.getForecast(longitude, latitude)
+
+    }
 
     private fun NetworkWeatherForecast.toExternalModel(): WeatherForecast {
         return WeatherForecast(
@@ -40,6 +49,12 @@ class WeatherRepositoryImpl @Inject constructor(
                 feelsLike = main.feelsLike,
             )
         )
+    }
+
+    private fun NetworkForecastResponse.toExternalForecastList() {
+        this.list.map {
+
+        }
     }
 
 }

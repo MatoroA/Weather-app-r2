@@ -21,7 +21,14 @@ class DemoOpenWeatherDatasource @Inject constructor(
             context.assets.open(CURRENT_LOCATION).use(json::decodeFromStream)
         }
 
+    @OptIn(ExperimentalSerializationApi::class)
+    override suspend fun getForecast(longitude: Double, latitude: Double): NetworkWeatherForecast =
+        withContext(Dispatchers.IO) {
+            context.assets.open(FORECAST).use(json::decodeFromStream)
+        }
+
     companion object {
         const val CURRENT_LOCATION = "current_location.json"
+        const val FORECAST = "five_days_forecast.json"
     }
 }
