@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.dvt.weather.android.library)
+    alias(libs.plugins.dvt.weather.compose.library)
 }
 
 android {
@@ -12,8 +13,6 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    api(libs.androidx.ui.graphics)
-    api(libs.androidx.compose.runtime)
+    implementation(libs.androidx.ui.graphics)
     api(libs.androidx.material3)
 }

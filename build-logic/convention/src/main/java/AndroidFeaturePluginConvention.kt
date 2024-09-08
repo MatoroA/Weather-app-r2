@@ -15,6 +15,7 @@ class AndroidFeaturePluginConvention : Plugin<Project> {
             with(pluginManager) {
                 apply("dvt.weather.android.library")
                 apply("org.jetbrains.kotlin.plugin.compose")
+                apply("dvt.weather.android.compose.library")
             }
 
             extensions.configure<LibraryExtension> {
@@ -30,13 +31,7 @@ class AndroidFeaturePluginConvention : Plugin<Project> {
             }
 
             dependencies {
-                val bom = libs.findLibrary("androidx.compose.bom").get()
-                add("implementation", platform(bom))
-                add("implementation", libs.findLibrary("androidx.compose.runtime").get())
-                add("implementation", libs.findLibrary("androidx.compose.ui").get())
-//                add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
                 add("implementation", libs.findLibrary("androidx.lifecycle.viewmodel.compose").get())
-                add("implementation", libs.findLibrary("androidx.material3").get())
             }
         }
     }
