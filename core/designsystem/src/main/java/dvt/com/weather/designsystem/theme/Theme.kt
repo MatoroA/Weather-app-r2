@@ -8,7 +8,7 @@ import dvt.com.weather.designsystem.R
 
 
 @Composable
-fun weatherTheme(
+fun WeatherTheme(
     sunny: Boolean = false,
     cloudy: Boolean = false,
     rainy: Boolean = false,
@@ -37,12 +37,12 @@ fun weatherTheme(
         )
     }
 
-
     CompositionLocalProvider(
         LocalBackgroundTheme provides backgroundTheme
     ) {
-        MaterialTheme(
-            content = content
-        )
+        MaterialTheme {
+            content()
+        }
     }
 }
+
