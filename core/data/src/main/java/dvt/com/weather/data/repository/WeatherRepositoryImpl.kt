@@ -1,5 +1,6 @@
 package dvt.com.weather.data.repository
 
+import dvt.com.weather.model.weather.Forecast
 import dvt.com.weather.model.weather.Main
 import dvt.com.weather.model.weather.Weather
 import dvt.com.weather.model.weather.WeatherForecast
@@ -23,8 +24,11 @@ class WeatherRepositoryImpl @Inject constructor(
     override fun getCurrentWeatherForecast(
         longitude: Double,
         latitude: Double,
-    ): Flow<WeatherForecast> = flow {
-        dataSource.getForecast(longitude, latitude)
+    ): Flow<List<Forecast>> = flow {
+        emit(
+            dataSource.getForecast(longitude, latitude)
+                .toExternalForecastList()
+        )
 
     }
 
@@ -51,10 +55,29 @@ class WeatherRepositoryImpl @Inject constructor(
         )
     }
 
-    private fun NetworkForecastResponse.toExternalForecastList() {
+    private fun NetworkForecastResponse.toExternalForecastList(): List<Forecast> =
         this.list.map {
-
+            Forecast(
+                dt = it.dt,
+                main = Main(
+                    temperatureMax = it.main.temperatureMax,
+                    temperatureMin = it.main.temperatureMin,
+                    temperature = it.main.temperature,
+                    pressure = it.main.pressure,
+                    humidity = it.main.humidity,
+                    seaLevel = it.main.seaLevel,
+                    groundLevel = it.main.groundLevel,
+                    feelsLike = it.main.feelsLike,
+                ),
+                weather = it.weather.map { weather ->
+                    Weather(
+                        id = weather.id,
+                        main = weather.main,
+                        icon = weather.icon,
+                        description = weather.description,
+                    )
+                }
+            )
         }
-    }
 
 }
