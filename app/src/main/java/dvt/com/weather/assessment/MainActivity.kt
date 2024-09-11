@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherTheme(
-                rainy = true
+                cloudy = true
             ) {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),

@@ -1,12 +1,16 @@
 package dvt.com.weather.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -65,6 +69,20 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
                 contentDescription = "sunny"
             )
             Text(text = "Temperature is: ${state.current.main.temperature}")
+
+            HorizontalDivider()
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            state.forecasts.forEach { forecast ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = "${forecast.dt}")
+                    Text(text = "${forecast.main.temperature}")
+                }
+            }
         }
     }
 }
