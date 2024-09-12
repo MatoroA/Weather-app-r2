@@ -50,7 +50,7 @@ internal fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
         is HomeUiState.Success -> HomeWeather(state = state)
     }
 }
-
+// we are cooking
 @Composable
 fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
     val current = LocalBackgroundTheme.current
