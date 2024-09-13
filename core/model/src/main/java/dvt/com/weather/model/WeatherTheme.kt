@@ -1,7 +1,8 @@
 package dvt.com.weather.model
 
-enum class WeatherTheme {
+enum class WeatherType {
     SUNNY,
     CLOUDY,
-    RAINY
+    RAINY,
+    UNSPECIFIED
 }

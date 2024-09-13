@@ -7,13 +7,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
 import dvt.com.weather.home.HomeRoute
+import dvt.com.weather.model.WeatherType
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -22,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherTheme(
-                cloudy = true
+                theme = WeatherType.RAINY
             ) {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -33,13 +32,5 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 

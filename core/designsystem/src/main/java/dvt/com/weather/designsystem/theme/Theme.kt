@@ -5,35 +5,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import dvt.com.weather.designsystem.R
+import dvt.com.weather.model.WeatherType
 
 
 @Composable
 fun WeatherTheme(
-    sunny: Boolean = false,
-    cloudy: Boolean = false,
-    rainy: Boolean = false,
+    theme: WeatherType,
     content: @Composable () -> Unit,
 ) {
 
-    val backgroundTheme = when {
-        sunny -> Background(
+    val backgroundTheme = when (theme) {
+        WeatherType.SUNNY -> Background(
             color = sunnyColor,
-            image = R.drawable.forest_sunny
+            image = R.drawable.forest_sunny,
+            theme = dvt.com.weather.model.WeatherType.SUNNY,
         )
 
-        cloudy -> Background(
+        WeatherType.CLOUDY -> Background(
             color = cloudyColor,
-            image = R.drawable.forest_cloudy
+            image = R.drawable.forest_cloudy,
+            theme = dvt.com.weather.model.WeatherType.CLOUDY,
         )
 
-        rainy -> Background(
+        WeatherType.RAINY -> Background(
             color = rainyColor,
-            image = R.drawable.forest_rainy
+            image = R.drawable.forest_rainy,
+            theme = dvt.com.weather.model.WeatherType.RAINY,
         )
 
         else -> Background(
             color = Color.Unspecified,
-            image = R.drawable.forest_rainy
+            image = R.drawable.forest_rainy,
+            theme = dvt.com.weather.model.WeatherType.UNSPECIFIED,
         )
     }
 

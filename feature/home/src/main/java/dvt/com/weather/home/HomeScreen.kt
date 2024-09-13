@@ -50,6 +50,7 @@ internal fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
         is HomeUiState.Success -> HomeWeather(state = state)
     }
 }
+
 // we are cooking
 @Composable
 fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
@@ -60,15 +61,27 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
             .fillMaxSize(),
     ) {
         Column {
-            Image(
-                painter = painterResource(id = current.image),
-                modifier = Modifier
-                    .height(250.dp)
-                    .fillMaxWidth(),
-                contentScale = ContentScale.FillBounds,
-                contentDescription = "sunny"
-            )
-            Text(text = "Temperature is: ${state.current.main.temperature}")
+            Box {
+                Image(
+                    painter = painterResource(id = current.image),
+                    modifier = Modifier
+                        .height(250.dp)
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.FillBounds,
+                    contentDescription = "sunny"
+                )
+
+                CurrentDayWeather(title = "Sunny", temperature = state.current.main.temperature)
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                CurrentDayWeather(title = "Min", temperature = state.current.main.temperatureMin)
+                CurrentDayWeather(title = "Current", temperature = state.current.main.temperature)
+                CurrentDayWeather(title = "Max", temperature = state.current.main.temperatureMax)
+            }
 
             HorizontalDivider()
 
@@ -84,6 +97,24 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun CurrentDayWeather(modifier: Modifier = Modifier, title: String, temperature: Double) {
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = temperature.toString())
+        Text(text = title)
+    }
+
+}
+
+
+@Preview(showBackground = true)
+@Composable
+private fun CurrentDayWeatherPrev() {
+    WeatherTheme {
+        CurrentDayWeather(title = "Min", temperature = 20.5)
     }
 }
 

@@ -13,6 +13,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.model)
+
     implementation(libs.androidx.ui.graphics)
     api(libs.androidx.material3)
 }

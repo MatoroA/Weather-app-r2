@@ -50,6 +50,7 @@ dependencies {
 
     implementation(projects.feature.home)
     implementation(projects.core.designsystem)
+    implementation(projects.core.model)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
