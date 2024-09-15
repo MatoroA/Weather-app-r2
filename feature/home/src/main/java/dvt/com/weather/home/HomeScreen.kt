@@ -21,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -54,7 +55,6 @@ internal fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
     }
 }
 
-// we are cooking
 @Composable
 fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
     val current = LocalBackgroundTheme.current
@@ -69,16 +69,7 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .layout { measurable, constraints ->
-                        val placeable = measurable.measure(
-                            constraints
-                                .copy(maxWidth = constraints.maxWidth + 16.dp.roundToPx())
-                        )
-
-                        layout(placeable.width, placeable.height) {
-                            placeable.place(0, 0)
-                        }
-                    },
+                    .fillScreenWidth(horizontalPadding = 16.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Image(
@@ -105,18 +96,10 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
                 CurrentDayWeather(title = "Max", temperature = state.current.main.temperatureMax)
             }
 
-            Box(modifier = Modifier.layout { measurable, constraints ->
-                val placeable =
-                    measurable.measure(
-                        constraints = constraints.copy(
-                            maxWidth = constraints.maxWidth + 16.dp.roundToPx()
-                        )
-                    )
-
-                layout(placeable.width, placeable.height) {
-                    placeable.place(0, 0)
-                }
-            }) {
+            Box(
+                modifier = Modifier
+                    .fillScreenWidth(horizontalPadding = 16.dp),
+            ) {
                 HorizontalDivider()
             }
 
@@ -156,6 +139,20 @@ fun CurrentDayWeather(modifier: Modifier = Modifier, title: String, temperature:
     }
 
 }
+
+@Composable
+private fun Modifier.fillScreenWidth(horizontalPadding: Dp): Modifier =
+    layout { measurable, constraints ->
+        val placeable = measurable.measure(
+            constraints.copy(
+                maxWidth = constraints.maxWidth + horizontalPadding.roundToPx()
+            )
+        )
+
+        layout(placeable.width, placeable.height) {
+            placeable.place(0, 0)
+        }
+    }
 
 
 @Preview(showBackground = true)
