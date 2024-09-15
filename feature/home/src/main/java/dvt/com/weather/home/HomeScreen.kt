@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
@@ -17,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,14 +59,28 @@ internal fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
 fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
     val current = LocalBackgroundTheme.current
 
-    Box(
-        modifier = modifier
-            .fillMaxSize(),
-    ) {
-        Column {
+    Box(modifier = modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .padding(
+                    horizontal = 8.dp
+                )
+        ) {
             Box(
-                contentAlignment = Alignment.Center
-            ){
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .layout { measurable, constraints ->
+                        val placeable = measurable.measure(
+                            constraints
+                                .copy(maxWidth = constraints.maxWidth + 16.dp.roundToPx())
+                        )
+
+                        layout(placeable.width, placeable.height) {
+                            placeable.place(0, 0)
+                        }
+                    },
+                contentAlignment = Alignment.Center,
+            ) {
                 Image(
                     painter = painterResource(id = current.image),
                     modifier = Modifier
@@ -89,7 +105,20 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
                 CurrentDayWeather(title = "Max", temperature = state.current.main.temperatureMax)
             }
 
-            HorizontalDivider()
+            Box(modifier = Modifier.layout { measurable, constraints ->
+                val placeable =
+                    measurable.measure(
+                        constraints = constraints.copy(
+                            maxWidth = constraints.maxWidth + 16.dp.roundToPx()
+                        )
+                    )
+
+                layout(placeable.width, placeable.height) {
+                    placeable.place(0, 0)
+                }
+            }) {
+                HorizontalDivider()
+            }
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -105,6 +134,19 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
         }
     }
 }
+
+@Composable
+private fun Modifier.fillMaxScreenWidth(x: Int, y: Int): Modifier =
+    this.layout { measurable, constraints ->
+        val placeable = measurable.measure(
+            constraints
+                .copy(maxWidth = constraints.maxWidth)
+        )
+
+        layout(placeable.width, placeable.height) {
+            placeable.place(x, y)
+        }
+    }
 
 @Composable
 fun CurrentDayWeather(modifier: Modifier = Modifier, title: String, temperature: Double) {
