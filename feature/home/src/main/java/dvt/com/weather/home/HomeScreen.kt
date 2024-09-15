@@ -71,8 +71,9 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
         ) {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .fillScreenWidth(horizontalPadding = horizontalScreenPadding),
+                    .fillScreenWidth(
+                        horizontalPadding = horizontalScreenPadding
+                    ),
                 contentAlignment = Alignment.Center,
             ) {
                 Image(
@@ -101,7 +102,9 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
 
             Box(
                 modifier = Modifier
-                    .fillScreenWidth(horizontalPadding = horizontalScreenPadding),
+                    .fillScreenWidth(
+                        horizontalPadding = horizontalScreenPadding
+                    ),
             ) {
                 HorizontalDivider()
             }
@@ -120,19 +123,6 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
         }
     }
 }
-
-@Composable
-private fun Modifier.fillMaxScreenWidth(x: Int, y: Int): Modifier =
-    this.layout { measurable, constraints ->
-        val placeable = measurable.measure(
-            constraints
-                .copy(maxWidth = constraints.maxWidth)
-        )
-
-        layout(placeable.width, placeable.height) {
-            placeable.place(x, y)
-        }
-    }
 
 @Composable
 fun CurrentDayWeather(modifier: Modifier = Modifier, title: String, temperature: Double) {
