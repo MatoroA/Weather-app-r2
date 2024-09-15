@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherTheme(
-                theme = WeatherType.RAINY
+                weatherType = WeatherType.SUNNY
             ) {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),

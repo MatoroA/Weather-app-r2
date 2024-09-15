@@ -24,6 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
+import dvt.com.weather.model.WeatherType
 import dvt.com.weather.model.weather.Main
 import dvt.com.weather.model.weather.CurrentWeather
 
@@ -61,7 +62,9 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
             .fillMaxSize(),
     ) {
         Column {
-            Box {
+            Box(
+                contentAlignment = Alignment.Center
+            ){
                 Image(
                     painter = painterResource(id = current.image),
                     modifier = Modifier
@@ -71,7 +74,10 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
                     contentDescription = "sunny"
                 )
 
-                CurrentDayWeather(title = "Sunny", temperature = state.current.main.temperature)
+                CurrentDayWeather(
+                    title = current.weatherType.name,
+                    temperature = state.current.main.temperature
+                )
             }
 
             Row(
