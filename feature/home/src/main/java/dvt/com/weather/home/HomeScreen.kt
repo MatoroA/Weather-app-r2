@@ -1,5 +1,6 @@
 package dvt.com.weather.home
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,8 +11,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,11 +29,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dvt.com.weather.designsystem.R
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
 import dvt.com.weather.model.WeatherType
 import dvt.com.weather.model.weather.Main
 import dvt.com.weather.model.weather.CurrentWeather
+import dvt.com.weather.model.weather.Forecast
 
 
 @Composable
@@ -113,16 +118,53 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
 
             state.forecasts.forEach { forecast ->
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
-                    Text(text = "${forecast.dt}")
-                    Text(text = "${forecast.main.temperature}")
+                    Text(
+                        text = getDayOfWeek(forecast.dt),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+
+                    if (forecast.weather.isNotEmpty())
+                        Image(
+                            modifier = Modifier.size(
+                                20.dp
+                            ),
+                            painter = painterResource(
+                                id = getWeatherIcon(
+                                    forecast.weather.first().id
+                                )
+                            ),
+                            contentDescription = ""
+                        )
+
+                    Text(
+                        text = "${forecast.main.temperature}",
+                        style = MaterialTheme.typography.bodyLarge
+                    )
                 }
             }
         }
     }
 }
+
+fun getWeatherIcon(weatherId: Int): Int =
+    when (weatherId) {
+        in 200..799 -> {
+            R.mipmap.rain
+        }
+
+        800 -> {
+            R.mipmap.clear
+        }
+
+        else -> {
+            R.mipmap.partlysunny
+        }
+    }
 
 @Composable
 fun CurrentDayWeather(modifier: Modifier = Modifier, title: String, temperature: Double) {
@@ -175,7 +217,23 @@ private fun HomeWeatherPreview() {
                         feelsLike = 0.0
                     )
                 ),
-                forecasts = emptyList()
+                forecasts = listOf(
+                    Forecast(
+                        dt = 1725310800L,
+                        main = Main(
+                            temperature = 22.0,
+                            temperatureMax = 56.0,
+                            temperatureMin = 23.4,
+                            pressure = 20,
+                            humidity = 9,
+                            seaLevel = 100,
+                            groundLevel = 0,
+                            feelsLike = 20.0,
+                        ),
+                        weather = emptyList()
+
+                    )
+                )
 
             )
         )
