@@ -15,6 +15,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -59,17 +60,19 @@ internal fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
 fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
     val current = LocalBackgroundTheme.current
 
+    val horizontalScreenPadding = 8.dp
+
     Box(modifier = modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .padding(
-                    horizontal = 8.dp
+                    horizontal = horizontalScreenPadding
                 )
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillScreenWidth(horizontalPadding = 16.dp),
+                    .fillScreenWidth(horizontalPadding = horizontalScreenPadding),
                 contentAlignment = Alignment.Center,
             ) {
                 Image(
@@ -98,7 +101,7 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
 
             Box(
                 modifier = Modifier
-                    .fillScreenWidth(horizontalPadding = 16.dp),
+                    .fillScreenWidth(horizontalPadding = horizontalScreenPadding),
             ) {
                 HorizontalDivider()
             }
@@ -145,7 +148,7 @@ private fun Modifier.fillScreenWidth(horizontalPadding: Dp): Modifier =
     layout { measurable, constraints ->
         val placeable = measurable.measure(
             constraints.copy(
-                maxWidth = constraints.maxWidth + horizontalPadding.roundToPx()
+                maxWidth = constraints.maxWidth + (horizontalPadding * 2).roundToPx()
             )
         )
 
