@@ -16,6 +16,7 @@ lifecycleVersion = "2.8.5"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 lifecycleRuntimeKtx = "2.8.4"
+locationService = "15.0.1"
 jetbrainsKotlinJvm = "1.9.0"
 material = "1.12.0"
 kotlin = "2.0.0"
@@ -48,6 +49,7 @@ dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", vers
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hiltAndroid" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+google-play-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "locationService" }
 
 # dependencies of included build
 android-tools-build-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradle" }
