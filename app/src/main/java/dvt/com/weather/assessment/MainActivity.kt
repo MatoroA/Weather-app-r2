@@ -1,7 +1,8 @@
 package dvt.com.weather.assessment
 
+import android.location.Address
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,10 +13,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
 import dvt.com.weather.home.HomeRoute
+import dvt.com.weather.model.CurrentLocation
 import dvt.com.weather.model.WeatherType
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : LocationActivity() {
+    private val TAG = MainActivity::class.java.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,6 +35,9 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onCurrentLocation(location: CurrentLocation?) {
     }
 }
 

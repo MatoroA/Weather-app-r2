@@ -10,6 +10,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
+import dvt.com.weather.model.CurrentLocation
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -60,15 +61,21 @@ abstract class LocationActivity : ComponentActivity() {
                 geocoder.getFromLocation(location.latitude, location.longitude, 1, geocodeListener)
             } else {
                 val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                    ?.firstOrNull()
+                    ?.firstOrNull()?.toCurrentLocation()
                 onCurrentLocation(address)
             }
         }
     }
 
     private val geocodeListener = Geocoder.GeocodeListener { addresses ->
-        onCurrentLocation(addresses.firstOrNull())
+        onCurrentLocation(addresses.firstOrNull()?.toCurrentLocation())
     }
 
-    abstract fun onCurrentLocation(address: Address?)
+    abstract fun onCurrentLocation(location: CurrentLocation?)
+
+    private fun Address.toCurrentLocation() = CurrentLocation(
+        city = adminArea,
+        longitude = longitude,
+        latitude = latitude,
+    )
 }
