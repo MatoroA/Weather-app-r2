@@ -1,4 +1,4 @@
-package dvt.com.weather.assessment
+package dvt.com.weather.assessment.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -10,6 +10,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
+import dvt.com.weather.assessment.hasPermissions
 import dvt.com.weather.model.CurrentLocation
 import javax.inject.Inject
 
