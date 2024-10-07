@@ -52,6 +52,8 @@ abstract class LocationActivity : ComponentActivity() {
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 )
             )
+        } else {
+            getLocation()
         }
     }
 
