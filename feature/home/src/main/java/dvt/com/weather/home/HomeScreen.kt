@@ -17,6 +17,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -32,6 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dvt.com.weather.designsystem.R
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
+import dvt.com.weather.model.CurrentLocation
 import dvt.com.weather.model.WeatherType
 import dvt.com.weather.model.weather.Main
 import dvt.com.weather.model.weather.CurrentWeather
@@ -40,9 +42,7 @@ import dvt.com.weather.model.weather.Forecast
 
 @Composable
 fun HomeRoute(modifier: Modifier = Modifier, viewModel: HomeScreenViewModel = hiltViewModel()) {
-
-    val state by viewModel.weatherForecast.collectAsStateWithLifecycle()
-
+    val state by viewModel.currentWeather.collectAsStateWithLifecycle()
     HomeScreen(state = state)
 }
 
@@ -55,6 +55,13 @@ internal fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
             contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator()
+        }
+
+        is HomeUiState.NotFound -> Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "Current weather not found!!!")
         }
 
         is HomeUiState.Success -> HomeWeather(state = state)
