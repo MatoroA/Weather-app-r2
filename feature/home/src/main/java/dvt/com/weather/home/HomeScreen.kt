@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -41,14 +43,19 @@ import dvt.com.weather.model.weather.Forecast
 
 
 @Composable
-fun HomeRoute(modifier: Modifier = Modifier, viewModel: HomeScreenViewModel = hiltViewModel()) {
+fun HomeRoute(
+    modifier: Modifier = Modifier,
+    viewModel: HomeScreenViewModel = hiltViewModel(),
+) {
     val state by viewModel.currentWeather.collectAsStateWithLifecycle()
     HomeScreen(state = state)
 }
 
 @Composable
-internal fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
-
+internal fun HomeScreen(
+    modifier: Modifier = Modifier,
+    state: HomeUiState,
+) {
     when (state) {
         HomeUiState.Loading -> Box(
             modifier = Modifier.fillMaxSize(),
@@ -64,7 +71,9 @@ internal fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
             Text(text = "Current weather not found!!!")
         }
 
-        is HomeUiState.Success -> HomeWeather(state = state)
+        is HomeUiState.Success -> {
+            HomeWeather(state = state)
+        }
     }
 }
 

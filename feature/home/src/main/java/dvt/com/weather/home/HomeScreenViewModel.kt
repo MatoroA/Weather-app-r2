@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dvt.com.weather.data.util.UserLocation
+import dvt.com.weather.data.util.CurrentLocationWeather
 import dvt.com.weather.domain.WeatherForecastUseCase
 import dvt.com.weather.model.weather.CurrentWeather
 import dvt.com.weather.model.weather.Forecast
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(
     weatherForecastUseCase: WeatherForecastUseCase,
-    userLocation: UserLocation,
+    currentLocationWeather: CurrentLocationWeather,
 ) : ViewModel() {
 
     companion object {
@@ -27,7 +27,7 @@ class HomeScreenViewModel @Inject constructor(
     }
 
     val currentWeather: StateFlow<HomeUiState> =
-        userLocation.location.flatMapLatest { currentLocation ->
+        currentLocationWeather.location.flatMapLatest { currentLocation ->
             Log.d(TAG, "get user current location: $currentLocation")
             when {
                 currentLocation != null -> weatherForecastUseCase.invoke(0.0, 0.0)
@@ -37,6 +37,7 @@ class HomeScreenViewModel @Inject constructor(
             .map { results ->
                 when {
                     results != null -> {
+                        currentLocationWeather.weather(results.currentWeather)
                         HomeUiState.Success(
                             current = results.currentWeather,
                             forecasts = results.forecast
