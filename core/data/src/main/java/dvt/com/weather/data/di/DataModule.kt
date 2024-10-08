@@ -6,8 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dvt.com.weather.data.repository.WeatherRepository
 import dvt.com.weather.data.repository.WeatherRepositoryImpl
-import dvt.com.weather.data.util.UserCurrentLocationImpl
-import dvt.com.weather.data.util.UserLocation
+import dvt.com.weather.data.util.CurrentLocationWeatherImpl
+import dvt.com.weather.data.util.CurrentLocationWeather
 import javax.inject.Singleton
 
 @Module
@@ -19,6 +19,6 @@ interface DataModule {
 
     @Singleton
     @Binds
-    fun bindsUserLocation(impl: UserCurrentLocationImpl): UserLocation
+    fun bindsUserLocation(impl: CurrentLocationWeatherImpl): CurrentLocationWeather
 
 }

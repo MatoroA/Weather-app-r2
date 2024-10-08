@@ -1,13 +1,14 @@
 package dvt.com.weather.data.util
 
 import dvt.com.weather.model.CurrentLocation
+import dvt.com.weather.model.weather.CurrentWeather
 import kotlinx.coroutines.flow.SharedFlow
 
-interface LocationTemperature {
+interface CurrentLocationWeather {
     val location: SharedFlow<CurrentLocation?>
-    val temperature: SharedFlow<Double>
+    val weather: SharedFlow<CurrentWeather?>
 
     suspend fun onLocationUpdate(location: CurrentLocation?)
 
-    suspend fun temperature(temperature: Double)
+    suspend fun weather(weather: CurrentWeather)
 }
