@@ -18,25 +18,25 @@ fun WeatherTheme(
         WeatherType.SUNNY -> Background(
             color = sunnyColor,
             image = R.drawable.forest_sunny,
-            weatherType = dvt.com.weather.model.WeatherType.SUNNY,
+            weatherType = WeatherType.SUNNY,
         )
 
         WeatherType.CLOUDY -> Background(
             color = cloudyColor,
             image = R.drawable.forest_cloudy,
-            weatherType = dvt.com.weather.model.WeatherType.CLOUDY,
+            weatherType = WeatherType.CLOUDY,
         )
 
         WeatherType.RAINY -> Background(
             color = rainyColor,
             image = R.drawable.forest_rainy,
-            weatherType = dvt.com.weather.model.WeatherType.RAINY,
+            weatherType = WeatherType.RAINY,
         )
 
         else -> Background(
             color = Color.Unspecified,
             image = R.drawable.forest_rainy,
-            weatherType = dvt.com.weather.model.WeatherType.UNSPECIFIED,
+            weatherType = WeatherType.UNSPECIFIED,
         )
     }
 
