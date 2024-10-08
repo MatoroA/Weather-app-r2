@@ -6,9 +6,6 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 interface UserLocation {
-
-    val isFlow: Flow<Boolean>
-
     val location: SharedFlow<CurrentLocation?>
 
     suspend fun onLocationUpdate(location: CurrentLocation?)

@@ -5,12 +5,12 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dvt.com.weather.network.WeatherDataSource
-import dvt.com.weather.network.demo.DemoOpenWeatherDatasource
+//import dvt.com.weather.network.demo.DemoOpenWeatherDatasource
 
-@Module
-@InstallIn(SingletonComponent::class)
-interface FlavoredNetworkModule {
-
-    @Binds
-    fun bindsOpenWeather(impl: DemoOpenWeatherDatasource): WeatherDataSource
-}
+//@Module
+//@InstallIn(SingletonComponent::class)
+//interface FlavoredNetworkModule {
+//
+//    @Binds
+//    fun bindsOpenWeather(impl: DemoOpenWeatherDatasource): WeatherDataSource
+//}

@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NetworkForecastResponse(
-    val cod: String,
+    val cod: Int,
     val list: List<NetworkForecast>,
 )

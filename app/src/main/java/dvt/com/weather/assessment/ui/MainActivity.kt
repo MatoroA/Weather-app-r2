@@ -30,7 +30,7 @@ class MainActivity : LocationActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherTheme(
-                weatherType = WeatherType.SUNNY
+                weatherType = WeatherType.UNSPECIFIED
             ) {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),

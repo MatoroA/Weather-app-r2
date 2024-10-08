@@ -12,12 +12,7 @@ class UserCurrentLocationImpl @Inject constructor() : UserLocation {
     private val _location = MutableSharedFlow<CurrentLocation?>()
     override val location: SharedFlow<CurrentLocation?> = _location
 
-    private val isBoolean = MutableStateFlow<Boolean>(true)
-    override val isFlow: Flow<Boolean>
-        get() = isBoolean
-
     override suspend fun onLocationUpdate(location: CurrentLocation?) {
-        isBoolean.value = !isBoolean.value
         _location.emit(location)
     }
 }
