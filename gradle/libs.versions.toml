@@ -9,6 +9,7 @@ composeBom = "2024.09.00"
 coreKtx = "1.13.1"
 devTools = "2.0.20-1.0.24"
 espressoCore = "3.6.1"
+gsonVersion = "2.9.0"
 hiltAndroid = "2.51.1"
 hilt = " 1.2.0"
 lifecycleRuntimeCompose = "2.8.5"
@@ -22,6 +23,9 @@ material = "1.12.0"
 kotlin = "2.0.0"
 kotlinPlugin = "2.0.20"
 kotlinSerialization = "1.7.1"
+okhttp3Version = "4.12.0"
+retrofitVersion = "2.11.0"
+retrofitSerialisationVersion = "0.8.0"
 
 
 [libraries]
@@ -50,6 +54,13 @@ dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", ve
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hiltAndroid" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 google-play-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "locationService" }
+google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3Version" }
+okhttp-logging-intercerptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3Version" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
+retrofit-serialisation-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitSerialisationVersion" }
+
 
 # dependencies of included build
 android-tools-build-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradle" }
