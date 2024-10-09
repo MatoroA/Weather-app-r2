@@ -26,5 +26,7 @@ interface RetrofitWeatherApi {
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("units") unit: String = "metric",
+        @Query("cnt") count: Int = 5,
+
     ): NetworkForecastResponse
 }
