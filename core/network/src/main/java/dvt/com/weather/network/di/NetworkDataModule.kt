@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dvt.com.weather.network.BuildConfig
 import dvt.com.weather.network.WeatherDataSource
 import dvt.com.weather.network.WeatherDataSourceImpl
 import dvt.com.weather.network.util.ServiceInterceptor
@@ -34,7 +35,7 @@ class NetworkDataModule {
         return Retrofit.Builder()
             .client(
                 OkHttpClient.Builder()
-                    .addInterceptor(ServiceInterceptor("505b2db913befd32000cc5d021a28249"))
+                    .addInterceptor(ServiceInterceptor(BuildConfig.WEATHER_API_KEY))
                     .addInterceptor(
                         HttpLoggingInterceptor().apply {
                             setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -43,7 +44,7 @@ class NetworkDataModule {
                     .build()
             )
             .addConverterFactory(networkJson.asConverterFactory("application/json".toMediaType()))
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .baseUrl(BuildConfig.BASE_URL)
             .build()
     }
 
