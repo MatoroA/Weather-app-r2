@@ -3,23 +3,13 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.dvt.weather.hilt)
     id("kotlinx-serialization")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
     namespace = "dvt.com.weather.network"
 
     defaultConfig {
-        buildConfigField(
-            "String",
-            "WEATHER_API_KEY",
-            "\"${project.findProperty("WEATHER_API_KEY")}\""
-        )
-
-        buildConfigField(
-            "String",
-            "BASE_URL",
-            "\"${project.findProperty("BASE_URL")}\""
-        )
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -27,6 +17,10 @@ android {
     buildFeatures {
         buildConfig = true
     }
+}
+
+secrets {
+    defaultPropertiesFileName = "secrets.default.properties"
 }
 
 dependencies {

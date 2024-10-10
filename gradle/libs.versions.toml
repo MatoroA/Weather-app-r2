@@ -26,6 +26,7 @@ kotlinSerialization = "1.7.1"
 okhttp3Version = "4.12.0"
 retrofitVersion = "2.11.0"
 retrofitSerialisationVersion = "0.8.0"
+secretsVersion = "2.0.1"
 
 
 [libraries]
@@ -77,6 +78,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinPlugin" }
 dagger-hilt-android-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
 devtoopls-ksp = { id = "com.google.devtools.ksp", version.ref = "devTools" }
+mapsplatform-secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsVersion" }
 
 # Custom defined plugins
 dvt-weather-android-application = { id = "dvt.weather.android.application", version = "unspecified" }

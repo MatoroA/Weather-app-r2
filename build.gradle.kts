@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.dagger.hilt.android.plugin) apply false
     alias(libs.plugins.devtoopls.ksp) apply false
+    alias(libs.plugins.mapsplatform.secrets) apply false
 }
