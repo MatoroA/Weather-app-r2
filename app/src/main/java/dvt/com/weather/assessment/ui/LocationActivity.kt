@@ -8,10 +8,15 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
 import dvt.com.weather.assessment.hasPermissions
+import dvt.com.weather.data.util.CurrentLocationWeather
 import dvt.com.weather.model.CurrentLocation
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,6 +27,9 @@ abstract class LocationActivity : ComponentActivity() {
 
     @Inject
     lateinit var geocoder: Geocoder
+
+    @Inject
+    lateinit var currentLocationWeather: CurrentLocationWeather
 
     private companion object {
         val TAG: String = LocationActivity::class.java.simpleName
@@ -42,7 +50,7 @@ abstract class LocationActivity : ComponentActivity() {
                     if (granted) {
                         getLocation()
                     } else {
-                        onCurrentLocation(null)
+                        onPermissionNotGranted()
                     }
                 }
 
@@ -74,7 +82,16 @@ abstract class LocationActivity : ComponentActivity() {
         onCurrentLocation(addresses.firstOrNull()?.toCurrentLocation())
     }
 
-    abstract fun onCurrentLocation(location: CurrentLocation?)
+    private fun onCurrentLocation(location: CurrentLocation?) {
+        lifecycleScope.launch {
+            // observes only when the state is started || when the screen is visible to the user.
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                currentLocationWeather.onLocationUpdate(location)
+            }
+        }
+    }
+
+    abstract fun onPermissionNotGranted()
 
     private fun Address.toCurrentLocation() = CurrentLocation(
         city = adminArea,
