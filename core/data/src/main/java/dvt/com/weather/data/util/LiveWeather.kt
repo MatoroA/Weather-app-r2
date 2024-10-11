@@ -1,11 +1,11 @@
 package dvt.com.weather.data.util
 
-import dvt.com.weather.model.weather.Weather
+import dvt.com.weather.model.weather.CurrentWeather
 import kotlinx.coroutines.flow.SharedFlow
 
 interface LiveWeather {
 
-    val liveWeather: SharedFlow<Weather>
+    val weather: SharedFlow<CurrentWeather>
 
-    suspend fun liveWeather(weather: Weather)
+    suspend fun liveWeather(weather: CurrentWeather)
 }

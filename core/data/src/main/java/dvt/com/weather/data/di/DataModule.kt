@@ -8,6 +8,8 @@ import dvt.com.weather.data.repository.WeatherRepository
 import dvt.com.weather.data.repository.WeatherRepositoryImpl
 import dvt.com.weather.data.util.DvtLocationManagerImpl
 import dvt.com.weather.data.util.DvtLocationManager
+import dvt.com.weather.data.util.LiveWeather
+import dvt.com.weather.data.util.LiveWeatherImpl
 import javax.inject.Singleton
 
 @Module
@@ -20,5 +22,9 @@ interface DataModule {
     @Singleton
     @Binds
     fun bindsUserLocation(impl: DvtLocationManagerImpl): DvtLocationManager
+
+    @Singleton
+    @Binds
+    fun bindsLiveWeather(impl: LiveWeatherImpl): LiveWeather
 
 }
