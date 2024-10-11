@@ -12,10 +12,4 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject constructor(
     private val currentLocationWeather: CurrentLocationWeather,
 ) : ViewModel() {
-
-    fun onUpdateLocation(currentLocation: CurrentLocation?) {
-        viewModelScope.launch {
-            currentLocationWeather.onLocationUpdate(currentLocation)
-        }
-    }
 }
