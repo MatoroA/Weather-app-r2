@@ -24,10 +24,6 @@ import javax.inject.Inject
 class MainActivity : LocationActivity() {
     private val TAG = MainActivity::class.java.simpleName
 
-    @Inject
-    lateinit var currentLocationWeather: CurrentLocationWeather
-    private val viewModel: MainActivityViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -66,8 +62,9 @@ class MainActivity : LocationActivity() {
         } ?: WeatherType.UNSPECIFIED
     }
 
-    override fun onCurrentLocation(location: CurrentLocation?) {
-        viewModel.onUpdateLocation(location)
+    override fun onPermissionNotGranted() {
+        // Permission not granted
     }
+
 }
 
