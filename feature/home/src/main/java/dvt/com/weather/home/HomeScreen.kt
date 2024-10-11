@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -39,16 +40,18 @@ import dvt.com.weather.model.weather.Forecast
 @Composable
 fun HomeRoute(
     modifier: Modifier = Modifier,
+    requestPermission: () -> Unit,
     viewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
     val state by viewModel.currentWeather.collectAsStateWithLifecycle()
-    HomeScreen(state = state)
+    HomeScreen(state = state, requestPermission = requestPermission)
 }
 
 @Composable
 internal fun HomeScreen(
     modifier: Modifier = Modifier,
     state: HomeUiState,
+    requestPermission: () -> Unit,
 ) {
     when (state) {
         HomeUiState.Loading -> Box(
@@ -59,8 +62,16 @@ internal fun HomeScreen(
         }
 
         is HomeUiState.PermDenied -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(text = "Permission has been denied, accept my boy")
+
+                Button(onClick = requestPermission) {
+                    Text(text = "Request permission")
+                }
             }
         }
 

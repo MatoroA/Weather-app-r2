@@ -43,6 +43,9 @@ class MainActivity : LocationActivity() {
                 ) { innerPadding ->
                     HomeRoute(
                         modifier = Modifier.padding(innerPadding),
+                        requestPermission = {
+                            requestLocationPermissions()
+                        }
                     )
                 }
             }
