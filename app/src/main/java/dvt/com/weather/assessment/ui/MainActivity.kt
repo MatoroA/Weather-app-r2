@@ -3,7 +3,6 @@ package dvt.com.weather.assessment.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -11,14 +10,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import dvt.com.weather.data.util.CurrentLocationWeather
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
 import dvt.com.weather.home.HomeRoute
-import dvt.com.weather.model.CurrentLocation
 import dvt.com.weather.model.WeatherType
 import dvt.com.weather.model.weather.CurrentWeather
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : LocationActivity() {
@@ -29,7 +25,7 @@ class MainActivity : LocationActivity() {
         enableEdgeToEdge()
         setContent {
 
-            val appState = rememberWeatherAppState(currentLocationWeather = currentLocationWeather)
+            val appState = rememberWeatherAppState(dvtLocationManager = dvtLocationManager)
 
             val weather by appState.currentTemperature.collectAsStateWithLifecycle()
 
@@ -60,10 +56,6 @@ class MainActivity : LocationActivity() {
                 else -> WeatherType.CLOUDY
             }
         } ?: WeatherType.UNSPECIFIED
-    }
-
-    override fun onPermissionNotGranted() {
-        // Permission not granted
     }
 
 }

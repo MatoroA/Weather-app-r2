@@ -14,7 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
 import dvt.com.weather.assessment.hasPermissions
-import dvt.com.weather.data.util.CurrentLocationWeather
+import dvt.com.weather.data.util.DvtLocationManager
 import dvt.com.weather.model.CurrentLocation
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,7 +29,7 @@ abstract class LocationActivity : ComponentActivity() {
     lateinit var geocoder: Geocoder
 
     @Inject
-    lateinit var currentLocationWeather: CurrentLocationWeather
+    lateinit var dvtLocationManager: DvtLocationManager
 
     private companion object {
         val TAG: String = LocationActivity::class.java.simpleName
@@ -38,31 +38,36 @@ abstract class LocationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val notGrated = !hasPermissions(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
+        val notGrated = !hasPermissions(*locationPermissions())
 
         if (notGrated) {
-            val resultLauncher =
-                registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
-                    val granted = results.values.all { it }
-                    if (granted) {
-                        getLocation()
-                    } else {
-                        onPermissionNotGranted()
-                    }
-                }
-
-            resultLauncher.launch(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-            )
+            requestLocationPermissions()
         } else {
             getLocation()
         }
+    }
+
+    fun requestLocationPermissions() {
+        val resultLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
+                val granted = results.values.all { it }
+                if (granted) {
+                    getLocation()
+                } else {
+                    runsSuspendMethod {
+                        dvtLocationManager.permissionDenied()
+                    }
+                }
+            }
+
+        resultLauncher.launch(locationPermissions())
+    }
+
+    private fun locationPermissions(): Array<String> {
+        return arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
     }
 
     @SuppressLint("MissingPermission")
@@ -83,15 +88,18 @@ abstract class LocationActivity : ComponentActivity() {
     }
 
     private fun onCurrentLocation(location: CurrentLocation?) {
-        lifecycleScope.launch {
-            // observes only when the state is started || when the screen is visible to the user.
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                currentLocationWeather.onLocationUpdate(location)
-            }
+        runsSuspendMethod {
+            location?.let { dvtLocationManager.onLocationUpdate(location) }
         }
     }
 
-    abstract fun onPermissionNotGranted()
+    private fun runsSuspendMethod(blocking: suspend () -> Unit) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                blocking()
+            }
+        }
+    }
 
     private fun Address.toCurrentLocation() = CurrentLocation(
         city = adminArea,
