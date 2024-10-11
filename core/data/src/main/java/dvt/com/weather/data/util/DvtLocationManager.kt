@@ -5,12 +5,13 @@ import dvt.com.weather.model.weather.CurrentWeather
 import kotlinx.coroutines.flow.SharedFlow
 
 interface DvtLocationManager {
-    val locationStatus: SharedFlow<LocationStatus?>
+    val locationStatus: SharedFlow<LocationStatus>
 
     suspend fun onLocationUpdate(location: CurrentLocation)
 
     suspend fun permissionDenied()
 
+    suspend fun notFound()
 }
 
 
@@ -20,4 +21,5 @@ sealed interface LocationStatus {
     ) : LocationStatus
 
     data object Denied : LocationStatus
+    data object NotFound : LocationStatus
 }

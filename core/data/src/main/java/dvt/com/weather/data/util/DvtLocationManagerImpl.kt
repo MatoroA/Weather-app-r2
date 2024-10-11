@@ -21,6 +21,11 @@ class DvtLocationManagerImpl @Inject constructor() : DvtLocationManager {
     override suspend fun permissionDenied() {
         _location.emit(LocationStatus.Denied)
     }
+
+    override suspend fun notFound() {
+        _location.emit(LocationStatus.NotFound)
+    }
+
 //
 //    override suspend fun weather(weather: CurrentWeather) {
 //        _weather.emit(weather)

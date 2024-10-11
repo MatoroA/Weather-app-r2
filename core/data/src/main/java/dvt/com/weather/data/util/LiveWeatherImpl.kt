@@ -4,8 +4,9 @@ import dvt.com.weather.model.weather.CurrentWeather
 import dvt.com.weather.model.weather.Weather
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import javax.inject.Inject
 
-class LiveWeatherImpl : LiveWeather {
+class LiveWeatherImpl @Inject constructor() : LiveWeather {
 
 
     private val _weather = MutableSharedFlow<CurrentWeather>()

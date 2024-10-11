@@ -89,7 +89,11 @@ abstract class LocationActivity : ComponentActivity() {
 
     private fun onCurrentLocation(location: CurrentLocation?) {
         runsSuspendMethod {
-            location?.let { dvtLocationManager.onLocationUpdate(location) }
+            if (location == null) {
+                dvtLocationManager.notFound()
+            } else {
+                dvtLocationManager.onLocationUpdate(location)
+            }
         }
     }
 

@@ -58,6 +58,12 @@ internal fun HomeScreen(
             CircularProgressIndicator()
         }
 
+        is HomeUiState.PermDenied -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(text = "Permission has been denied, accept my boy")
+            }
+        }
+
         is HomeUiState.NotFound -> Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center

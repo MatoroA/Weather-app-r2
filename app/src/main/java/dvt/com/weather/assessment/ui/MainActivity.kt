@@ -10,22 +10,27 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import dvt.com.weather.data.util.LiveWeather
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
 import dvt.com.weather.home.HomeRoute
 import dvt.com.weather.model.WeatherType
 import dvt.com.weather.model.weather.CurrentWeather
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : LocationActivity() {
     private val TAG = MainActivity::class.java.simpleName
+
+    @Inject
+    lateinit var liveWeather: LiveWeather
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
 
-            val appState = rememberWeatherAppState(dvtLocationManager = dvtLocationManager)
+            val appState = rememberWeatherAppState(liveWeather = liveWeather)
 
             val weather by appState.currentTemperature.collectAsStateWithLifecycle()
 
