@@ -63,17 +63,15 @@ abstract class LocationActivity : ComponentActivity() {
         resultLauncher.launch(locationPermissions())
     }
 
-    private fun locationPermissions(): Array<String> {
-        return arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
-    }
+    private fun locationPermissions(): Array<String> = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
 
     @SuppressLint("MissingPermission")
     private fun getLocation() {
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-            if (Build.VERSION.SDK_INT >= 33) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 geocoder.getFromLocation(location.latitude, location.longitude, 1, geocodeListener)
             } else {
                 val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)
