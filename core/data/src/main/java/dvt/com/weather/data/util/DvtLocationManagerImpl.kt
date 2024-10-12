@@ -11,9 +11,6 @@ class DvtLocationManagerImpl @Inject constructor() : DvtLocationManager {
     private val _location = MutableSharedFlow<LocationStatus>()
     override val locationStatus: SharedFlow<LocationStatus> = _location
 
-    //    private val _weather = MutableSharedFlow<CurrentWeather?>()
-//    override val weather: SharedFlow<CurrentWeather?> = _weather
-//
     override suspend fun onLocationUpdate(location: CurrentLocation) {
         _location.emit(LocationStatus.Granted(location))
     }
@@ -25,11 +22,4 @@ class DvtLocationManagerImpl @Inject constructor() : DvtLocationManager {
     override suspend fun notFound() {
         _location.emit(LocationStatus.NotFound)
     }
-
-//
-//    override suspend fun weather(weather: CurrentWeather) {
-//        _weather.emit(weather)
-//    }
-
-
 }
