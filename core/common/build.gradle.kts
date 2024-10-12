@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.dvt.weather.android.library)
+    alias(libs.plugins.dvt.weather.hilt)
 }
 
 android {
