@@ -2,6 +2,7 @@ package dvt.com.weather.data.di
 
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dvt.com.weather.data.repository.WeatherRepository
@@ -10,6 +11,8 @@ import dvt.com.weather.data.util.DvtLocationManagerImpl
 import dvt.com.weather.data.util.DvtLocationManager
 import dvt.com.weather.data.util.LiveWeather
 import dvt.com.weather.data.util.LiveWeatherImpl
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
@@ -26,5 +29,4 @@ interface DataModule {
     @Singleton
     @Binds
     fun bindsLiveWeather(impl: LiveWeatherImpl): LiveWeather
-
 }
