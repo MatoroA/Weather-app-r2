@@ -19,6 +19,8 @@ import dvt.com.weather.model.CurrentLocation
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
+// This is an old way of handling permissions requests
 @AndroidEntryPoint
 abstract class LocationActivity : ComponentActivity() {
 
