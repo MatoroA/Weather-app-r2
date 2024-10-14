@@ -23,15 +23,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+//import dvt.com.weather.common.LocationPermission
 import dvt.com.weather.designsystem.R
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
+import dvt.com.weather.model.CurrentLocation
 import dvt.com.weather.model.weather.Main
 import dvt.com.weather.model.weather.CurrentWeather
 import dvt.com.weather.model.weather.Forecast
@@ -43,6 +46,8 @@ fun HomeRoute(
     requestPermission: () -> Unit,
     viewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
+
+//    LocationPermission()
     val state by viewModel.currentWeather.collectAsStateWithLifecycle()
     HomeScreen(state = state, requestPermission = requestPermission)
 }
@@ -117,10 +122,21 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
                     contentDescription = "sunny"
                 )
 
-                CurrentDayWeather(
-                    title = current.weatherType.name,
-                    temperature = state.current.main.temperature
-                )
+                Column {
+                    if (state.location.city != null) {
+                        Text(
+                            text = state.location.city!!,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Box(modifier = Modifier.height(10.dp))
+                    }
+
+                    CurrentDayWeather(
+                        title = current.weatherType.name,
+                        temperature = state.current.main.temperature
+                    )
+                }
             }
 
             Row(
@@ -234,6 +250,7 @@ private fun HomeWeatherPreview() {
     WeatherTheme {
         HomeWeather(
             state = HomeUiState.Success(
+                location = CurrentLocation(city = null, longitude = 0.0, latitude = 0.0),
                 current = CurrentWeather(
                     weather = emptyList(),
                     main = Main(
@@ -262,8 +279,9 @@ private fun HomeWeatherPreview() {
                         ),
                         weather = emptyList()
 
+                    ),
+
                     )
-                )
 
             )
         )

@@ -8,6 +8,7 @@ import dvt.com.weather.data.util.DvtLocationManager
 import dvt.com.weather.data.util.LiveWeather
 import dvt.com.weather.data.util.LocationStatus
 import dvt.com.weather.domain.WeatherForecastUseCase
+import dvt.com.weather.model.CurrentLocation
 import dvt.com.weather.model.weather.CurrentWeather
 import dvt.com.weather.model.weather.Forecast
 import kotlinx.coroutines.flow.SharingStarted
@@ -38,16 +39,18 @@ class HomeScreenViewModel @Inject constructor(
                 LocationStatus.Denied -> flowOf(HomeUiState.PermDenied)
                 LocationStatus.NotFound -> flowOf(HomeUiState.NotFound)
                 is LocationStatus.Granted -> {
+                    val location = status.location
                     weatherForecastUseCase(
-                        status.location.latitude,
-                        status.location.longitude
+                        location.latitude,
+                        location.longitude
                     ).map { data ->
                         // update current user location weather
                         liveWeather.liveWeather(data.currentWeather)
 
                         HomeUiState.Success(
                             current = data.currentWeather,
-                            forecasts = data.forecast
+                            forecasts = data.forecast,
+                            location = location
                         )
 
                     }
@@ -68,5 +71,9 @@ sealed interface HomeUiState {
     data object NotFound : HomeUiState
     data object PermDenied : HomeUiState
 
-    data class Success(val current: CurrentWeather, val forecasts: List<Forecast>) : HomeUiState
+    data class Success(
+        val current: CurrentWeather,
+        val forecasts: List<Forecast>,
+        val location: CurrentLocation,
+    ) : HomeUiState
 }
