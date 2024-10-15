@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
-class LiveWeatherImpl @Inject constructor() : LiveWeather {
+class LiveWeatherManagerImpl @Inject constructor() : LiveWeatherManager {
     private val _weather = MutableSharedFlow<CurrentWeather>()
     override val weather: SharedFlow<CurrentWeather> = _weather
 

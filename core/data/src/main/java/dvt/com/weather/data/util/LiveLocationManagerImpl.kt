@@ -1,6 +1,5 @@
 package dvt.com.weather.data.util
 
-import dvt.com.weather.data.util.LocationStatus.*
 import dvt.com.weather.model.CurrentLocation
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

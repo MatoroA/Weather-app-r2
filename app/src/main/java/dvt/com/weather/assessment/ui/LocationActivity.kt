@@ -14,7 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
 import dvt.com.weather.assessment.hasPermissions
-import dvt.com.weather.data.util.DvtLocationManager
+import dvt.com.weather.data.util.LiveLocationManager
 import dvt.com.weather.model.CurrentLocation
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,7 +31,7 @@ abstract class LocationActivity : ComponentActivity() {
     lateinit var geocoder: Geocoder
 
     @Inject
-    lateinit var dvtLocationManager: DvtLocationManager
+    lateinit var liveLocationManager: LiveLocationManager
 
     private companion object {
         val TAG: String = LocationActivity::class.java.simpleName
@@ -57,7 +57,7 @@ abstract class LocationActivity : ComponentActivity() {
                     getLocation()
                 } else {
                     runsSuspendMethod {
-                        dvtLocationManager.permissionDenied()
+//                        liveLocationManager.permissionDenied()
                     }
                 }
             }
@@ -90,9 +90,9 @@ abstract class LocationActivity : ComponentActivity() {
     private fun onCurrentLocation(location: CurrentLocation?) {
         runsSuspendMethod {
             if (location == null) {
-                dvtLocationManager.notFound()
+//                liveLocationManager.notFound()
             } else {
-                dvtLocationManager.onLocationUpdate(location)
+                liveLocationManager.onLocationUpdate(location)
             }
         }
     }
