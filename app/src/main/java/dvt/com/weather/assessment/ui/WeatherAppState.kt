@@ -4,8 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import dvt.com.weather.data.util.DvtLocationManager
-import dvt.com.weather.data.util.LiveWeather
+import dvt.com.weather.data.util.LiveWeatherManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -13,20 +12,20 @@ import kotlinx.coroutines.flow.stateIn
 
 @Composable
 fun rememberWeatherAppState(
-    liveWeather: LiveWeather,
+    liveWeatherManager: LiveWeatherManager,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
 ): WeatherAppState {
-    return remember(liveWeather, coroutineScope) {
-        WeatherAppState(liveWeather, coroutineScope)
+    return remember(liveWeatherManager, coroutineScope) {
+        WeatherAppState(liveWeatherManager, coroutineScope)
     }
 }
 
 @Stable
 class WeatherAppState(
-    liveWeather: LiveWeather,
+    liveWeatherManager: LiveWeatherManager,
     coroutineScope: CoroutineScope,
 ) {
-    val currentTemperature = liveWeather.weather.stateIn(
+    val currentTemperature = liveWeatherManager.weather.stateIn(
         scope = coroutineScope,
         initialValue = null,
         started = SharingStarted.WhileSubscribed(5_000)

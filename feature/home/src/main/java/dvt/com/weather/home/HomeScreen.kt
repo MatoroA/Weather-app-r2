@@ -17,6 +17,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dvt.com.weather.common.LocationPermissionTest
 //import dvt.com.weather.common.LocationPermission
 import dvt.com.weather.designsystem.R
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
@@ -47,8 +49,8 @@ fun HomeRoute(
     viewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
 
-//    LocationPermission()
     val state by viewModel.currentWeather.collectAsStateWithLifecycle()
+
     HomeScreen(state = state, requestPermission = requestPermission)
 }
 
@@ -64,20 +66,6 @@ internal fun HomeScreen(
             contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator()
-        }
-
-        is HomeUiState.PermDenied -> {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "Permission has been denied, accept my boy")
-
-                Button(onClick = requestPermission) {
-                    Text(text = "Request permission")
-                }
-            }
         }
 
         is HomeUiState.NotFound -> Box(

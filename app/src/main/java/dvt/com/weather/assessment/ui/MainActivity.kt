@@ -1,6 +1,7 @@
 package dvt.com.weather.assessment.ui
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,32 +11,31 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import dvt.com.weather.data.util.LiveWeather
+import dvt.com.weather.data.util.LiveWeatherManager
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
 import dvt.com.weather.home.HomeRoute
 import dvt.com.weather.model.WeatherType
-import dvt.com.weather.model.weather.CurrentWeather
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : LocationActivity() {
+class MainActivity : ComponentActivity() {
     private val TAG = MainActivity::class.java.simpleName
 
     @Inject
-    lateinit var liveWeather: LiveWeather
+    lateinit var liveWeatherManager: LiveWeatherManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
 
-            val appState = rememberWeatherAppState(liveWeather = liveWeather)
+            val appState = rememberWeatherAppState(liveWeatherManager = liveWeatherManager)
 
             val weather by appState.currentTemperature.collectAsStateWithLifecycle()
 
             WeatherTheme(
-                weatherType = weather.getWeatherType()
+                weatherType = WeatherType.CLOUDY
             ) {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -44,26 +44,12 @@ class MainActivity : LocationActivity() {
                     HomeRoute(
                         modifier = Modifier.padding(innerPadding),
                         requestPermission = {
-                            requestLocationPermissions()
+//                            requestLocationPermissions()
                         }
                     )
                 }
             }
         }
-    }
-
-    private fun CurrentWeather?.getWeatherType(): WeatherType {
-        if (this == null) {
-            return WeatherType.UNSPECIFIED
-        }
-
-        return weather.firstOrNull()?.let {
-            when (it.id) {
-                in 200..799 -> WeatherType.RAINY
-                800 -> WeatherType.SUNNY
-                else -> WeatherType.CLOUDY
-            }
-        } ?: WeatherType.UNSPECIFIED
     }
 
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dvt.com.weather.data.util.LiveLocationManager
-import dvt.com.weather.data.util.LiveWeather
+import dvt.com.weather.data.util.LiveWeatherManager
 import dvt.com.weather.domain.WeatherForecastUseCase
 import dvt.com.weather.home.HomeUiState.*
 import dvt.com.weather.model.CurrentLocation
@@ -23,7 +23,7 @@ import javax.inject.Inject
 class HomeScreenViewModel @Inject constructor(
     weatherForecastUseCase: WeatherForecastUseCase,
     liveLocationManager: LiveLocationManager,
-    liveWeather: LiveWeather,
+    liveWeatherManager: LiveWeatherManager,
 ) : ViewModel() {
 
     companion object {
@@ -40,7 +40,7 @@ class HomeScreenViewModel @Inject constructor(
                         longitude = location.longitude,
                         latitude = location.latitude
                     ).map { userLocationWeather ->
-                        liveWeather.liveWeather(weather = userLocationWeather.currentWeather)
+                        liveWeatherManager.liveWeather(weather = userLocationWeather.currentWeather)
 
                         Success(
                             current = userLocationWeather.currentWeather,
@@ -54,7 +54,7 @@ class HomeScreenViewModel @Inject constructor(
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = Loading
+                initialValue = NotFound
             )
 
 
