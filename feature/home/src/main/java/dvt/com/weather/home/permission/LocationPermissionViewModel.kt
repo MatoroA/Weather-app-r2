@@ -15,3 +15,9 @@ class LocationPermissionViewModel @Inject constructor(
     }
 
 }
+
+sealed interface LocationPermStatus {
+    data object Initial : LocationPermStatus
+    data object Denied : LocationPermStatus
+    data object Accepted : LocationPermStatus
+}
