@@ -47,7 +47,6 @@ class LiveLocationManagerImpl @Inject constructor(
         onCurrentLocation(addresses.firstOrNull()?.toCurrentLocation())
     }
 
-
     private fun onCurrentLocation(location: CurrentLocation?) {
         _location.value = location
     }
@@ -57,6 +56,4 @@ class LiveLocationManagerImpl @Inject constructor(
         longitude = longitude,
         latitude = latitude,
     )
-
-
 }

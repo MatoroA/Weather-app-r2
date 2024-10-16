@@ -14,6 +14,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import dvt.com.weather.home.permission.LocationPermStatus.Granted
+import dvt.com.weather.home.permission.LocationPermStatus.NotGranted
 
 @Composable
 fun LocationPermission(
@@ -21,22 +23,27 @@ fun LocationPermission(
     granted: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
+
+
     var locationPermsGranted by remember {
         mutableStateOf(
-            hasPermission(
-                permissions = locationPermissions(),
-                context = context
-            )
+            if (hasPermission(
+                    permissions = locationPermissions(),
+                    context = context
+                )
+            ) Granted else NotGranted
         )
     }
 
     // when permission is not granted, launch
-    if (!locationPermsGranted) {
+    if (locationPermsGranted == NotGranted) {
         val launcher =
             rememberLauncherForActivityResult(contract = RequestMultiplePermissions()) { map ->
                 val granted = map.values.all { it }
                 if (granted) {
-                    locationPermsGranted = true
+                    locationPermsGranted = Granted
+                } else {
+                    viewModel.onUpdateStatus(LocationPermStatus.Denied)
                 }
             }
 
