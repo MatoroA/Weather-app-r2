@@ -23,10 +23,12 @@ import javax.inject.Singleton
 interface DataModule {
 
     companion object {
+        @Singleton
         @Provides
         fun providesFusedLocation(@ApplicationContext context: Context): FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(context)
 
+        @Singleton
         @Provides
         fun providesGeoCoder(@ApplicationContext context: Context): Geocoder = Geocoder(context)
     }
