@@ -41,12 +41,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     containerColor = LocalBackgroundTheme.current.color
                 ) { innerPadding ->
-                    HomeRoute(
-                        modifier = Modifier.padding(innerPadding),
-                        requestPermission = {
-//                            requestLocationPermissions()
-                        }
-                    )
+                    HomeRoute(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
