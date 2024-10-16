@@ -11,7 +11,9 @@ import dvt.com.weather.common.DvtDispatchers
 import dvt.com.weather.model.CurrentLocation
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class LiveLocationManagerImpl @Inject constructor(
@@ -24,16 +26,12 @@ class LiveLocationManagerImpl @Inject constructor(
         val TAG = LiveLocationManagerImpl::class.simpleName
     }
 
-    private val _location = MutableSharedFlow<CurrentLocation?>()
-    override val locationStatus: SharedFlow<CurrentLocation?> = _location
-
-    override suspend fun onLocationUpdate(location: CurrentLocation?) {
-        _location.emit(location)
-    }
+    private val _location = MutableStateFlow<CurrentLocation?>(null)
+    override val locationStatus: StateFlow<CurrentLocation?> = _location
 
 
     @SuppressLint("MissingPermission")
-    private fun getLocation() {
+    override fun getLocation() {
         fusedLocation.lastLocation.addOnSuccessListener { location ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 geocoder.getFromLocation(location.latitude, location.longitude, 1, geocodeListener)
@@ -51,8 +49,7 @@ class LiveLocationManagerImpl @Inject constructor(
 
 
     private fun onCurrentLocation(location: CurrentLocation?) {
-        val successful = _location.tryEmit(location)
-        Log.d(TAG, "onCurrentLocation: did it emit location successfully? $successful")
+        _location.value = location
     }
 
     private fun Address.toCurrentLocation() = CurrentLocation(

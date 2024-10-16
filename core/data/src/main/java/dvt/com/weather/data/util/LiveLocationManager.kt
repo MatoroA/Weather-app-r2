@@ -2,10 +2,11 @@ package dvt.com.weather.data.util
 
 import dvt.com.weather.model.CurrentLocation
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 
 interface LiveLocationManager {
-    val locationStatus: SharedFlow<CurrentLocation?>
+    val locationStatus: StateFlow<CurrentLocation?>
 
-    suspend fun onLocationUpdate(location: CurrentLocation?)
+    fun getLocation()
 }
 
