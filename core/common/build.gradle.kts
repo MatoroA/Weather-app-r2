@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.dvt.weather.android.library)
+    alias(libs.plugins.dvt.weather.android.feature)
     alias(libs.plugins.dvt.weather.hilt)
 }
 
@@ -13,10 +13,5 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity.compose)
 
 }
