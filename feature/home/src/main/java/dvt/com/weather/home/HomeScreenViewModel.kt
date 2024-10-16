@@ -34,7 +34,7 @@ class HomeScreenViewModel @Inject constructor(
         liveLocationManager.locationStatus.flatMapLatest { location ->
             Log.d(TAG, "get user current location: $location")
             when (location) {
-                null -> flowOf(NotFound)
+                null -> flowOf(Loading)
                 else -> {
                     weatherForecastUseCase(
                         longitude = location.longitude,
@@ -54,7 +54,7 @@ class HomeScreenViewModel @Inject constructor(
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = NotFound
+                initialValue = Loading
             )
 
 

@@ -13,11 +13,10 @@ class LocationPermissionViewModel @Inject constructor(
     fun getLiveLocation() {
         liveLocationManager.getLocation()
     }
-
 }
 
 sealed interface LocationPermStatus {
-    data object Initial : LocationPermStatus
     data object Denied : LocationPermStatus
-    data object Accepted : LocationPermStatus
+    data object NotGranted : LocationPermStatus
+    data object Granted : LocationPermStatus
 }

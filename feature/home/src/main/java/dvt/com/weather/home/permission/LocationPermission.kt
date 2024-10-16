@@ -14,8 +14,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import dvt.com.weather.home.permission.LocationPermStatus.Granted
-import dvt.com.weather.home.permission.LocationPermStatus.NotGranted
 
 @Composable
 fun LocationPermission(
@@ -25,35 +23,43 @@ fun LocationPermission(
     val context = LocalContext.current
 
 
-    var locationPermsGranted by remember {
+    var locationStatus by remember {
         mutableStateOf(
             if (hasPermission(
                     permissions = locationPermissions(),
                     context = context
                 )
-            ) Granted else NotGranted
+            ) LocationPermStatus.Granted else LocationPermStatus.NotGranted
         )
     }
 
     // when permission is not granted, launch
-    if (locationPermsGranted == NotGranted) {
-        val launcher =
-            rememberLauncherForActivityResult(contract = RequestMultiplePermissions()) { map ->
-                val granted = map.values.all { it }
-                if (granted) {
-                    locationPermsGranted = Granted
-                } else {
-                    viewModel.onUpdateStatus(LocationPermStatus.Denied)
-                }
-            }
 
-        LaunchedEffect(Unit) {
-            launcher.launch(arrayOf(*locationPermissions()))
+    when (locationStatus) {
+        LocationPermStatus.Granted -> {
+            viewModel.getLiveLocation()
+            granted()
         }
-    } else {
-        // update view model and get current location
-        viewModel.getLiveLocation()
-        granted()
+
+        LocationPermStatus.NotGranted -> {
+            val launcher =
+                rememberLauncherForActivityResult(contract = RequestMultiplePermissions()) { map ->
+                    val granted = map.values.all { it }
+                    if (granted) {
+                        locationStatus = LocationPermStatus.Granted
+                    } else {
+                        locationStatus = LocationPermStatus.Denied
+                    }
+                }
+
+            LaunchedEffect(Unit) {
+                launcher.launch(arrayOf(*locationPermissions()))
+            }
+        }
+
+        LocationPermStatus.Denied -> {
+            // app settings pop up
+        }
     }
 }
 
