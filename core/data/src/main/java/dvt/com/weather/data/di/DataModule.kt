@@ -1,8 +1,14 @@
 package dvt.com.weather.data.di
 
+import android.content.Context
+import android.location.Geocoder
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dvt.com.weather.data.repository.WeatherRepository
 import dvt.com.weather.data.repository.WeatherRepositoryImpl
@@ -16,6 +22,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 interface DataModule {
 
+    companion object {
+        @Provides
+        fun providesFusedLocation(@ApplicationContext context: Context): FusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(context)
+
+        @Provides
+        fun providesGeoCoder(@ApplicationContext context: Context): Geocoder = Geocoder(context)
+    }
+
     @Binds
     fun bindsWeatherRepository(impl: WeatherRepositoryImpl): WeatherRepository
 
@@ -26,4 +41,5 @@ interface DataModule {
     @Singleton
     @Binds
     fun bindsLiveWeather(impl: LiveWeatherManagerImpl): LiveWeatherManager
+
 }
