@@ -1,6 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.dvt.weather.android.library)
 }
 
 android {
@@ -13,4 +12,5 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.room.runtime)
 }
