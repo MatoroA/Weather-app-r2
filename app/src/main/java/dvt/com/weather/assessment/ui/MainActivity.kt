@@ -16,6 +16,7 @@ import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
 import dvt.com.weather.home.HomeRoute
 import dvt.com.weather.model.WeatherType
+import dvt.com.weather.model.weather.CurrentWeather
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
             val weather by appState.currentTemperature.collectAsStateWithLifecycle()
 
             WeatherTheme(
-                weatherType = WeatherType.CLOUDY
+                weatherType = weather.getWeatherTheme()
             ) {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -46,6 +47,15 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private fun CurrentWeather?.getWeatherTheme(): WeatherType = this?.weather?.firstOrNull()?.let {
+        when (it.id) {
+            800 -> WeatherType.SUNNY
+            in 200..799 -> WeatherType.CLOUDY
+            else -> WeatherType.RAINY
+        }
+
+    } ?: WeatherType.UNSPECIFIED
 
 }
 
