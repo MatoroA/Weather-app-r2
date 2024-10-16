@@ -11,13 +11,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,11 +29,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dvt.com.weather.common.LocationPermissionTest
-//import dvt.com.weather.common.LocationPermission
 import dvt.com.weather.designsystem.R
 import dvt.com.weather.designsystem.theme.LocalBackgroundTheme
 import dvt.com.weather.designsystem.theme.WeatherTheme
+import dvt.com.weather.home.permission.LocationPermission
 import dvt.com.weather.model.CurrentLocation
 import dvt.com.weather.model.weather.Main
 import dvt.com.weather.model.weather.CurrentWeather
@@ -43,22 +40,24 @@ import dvt.com.weather.model.weather.Forecast
 
 
 @Composable
-fun HomeRoute(
-    modifier: Modifier = Modifier,
-    requestPermission: () -> Unit,
+fun HomeRoute(modifier: Modifier) {
+    LocationPermission {
+        HomeScreen()
+    }
+}
+
+@Composable
+internal fun HomeScreen(
     viewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
-
     val state by viewModel.currentWeather.collectAsStateWithLifecycle()
-
-    HomeScreen(state = state, requestPermission = requestPermission)
+    HomeScreen(state = state)
 }
 
 @Composable
 internal fun HomeScreen(
     modifier: Modifier = Modifier,
     state: HomeUiState,
-    requestPermission: () -> Unit,
 ) {
     when (state) {
         HomeUiState.Loading -> Box(
