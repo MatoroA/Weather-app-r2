@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun LocationPermission(
     viewModel: LocationPermissionViewModel = hiltViewModel(),
-    granted: @Composable () -> Unit,
+    content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -38,17 +38,17 @@ fun LocationPermission(
     when (locationStatus) {
         LocationPermStatus.Granted -> {
             viewModel.getLiveLocation()
-            granted()
+            content()
         }
 
         LocationPermStatus.NotGranted -> {
             val launcher =
                 rememberLauncherForActivityResult(contract = RequestMultiplePermissions()) { map ->
                     val granted = map.values.all { it }
-                    if (granted) {
-                        locationStatus = LocationPermStatus.Granted
+                    locationStatus = if (granted) {
+                        LocationPermStatus.Granted
                     } else {
-                        locationStatus = LocationPermStatus.Denied
+                        LocationPermStatus.Denied
                     }
                 }
 
