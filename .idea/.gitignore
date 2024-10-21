@@ -1,3 +1,9 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+
+# ignore compiler xml
+/compiler.xml
+
+#ignore gradle.xml
+/gradle.xml

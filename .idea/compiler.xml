@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
       <module name="WeatherApp.common" target="17" />
+      <module name="WeatherApp.core.databse" target="17" />
       <module name="WeatherApp.feature.favored" target="17" />
       <module name="WeatherApp.feature.main" target="17" />
       <module name="WeatherApp.feature.test" target="17" />
