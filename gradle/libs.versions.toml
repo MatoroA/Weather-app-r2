@@ -11,7 +11,7 @@ devTools = "2.0.20-1.0.24"
 espressoCore = "3.6.1"
 gsonVersion = "2.9.0"
 hiltAndroid = "2.51.1"
-hilt = " 1.2.0"
+hiltVersion = "1.2.0"
 lifecycleRuntimeCompose = "2.8.5"
 lifecycleVersion = "2.8.5"
 junit = "4.13.2"
@@ -28,6 +28,8 @@ retrofitVersion = "2.11.0"
 retrofitSerialisationVersion = "0.8.0"
 roomVersion = "2.6.1"
 secretsVersion = "2.0.1"
+workVersion = "2.9.1"
+hiltCommon = "1.2.0"
 
 
 [libraries]
@@ -51,10 +53,13 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleVersion" }
-androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltVersion" }
 dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hiltAndroid" }
+hilt-work = { group = "androidx.hilt", name ="hilt-work", version.ref = "hiltVersion" }
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workVersion" }
+hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltVersion" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 google-play-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "locationService" }
 google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion" }
@@ -70,6 +75,7 @@ android-tools-build-gradle = { group = "com.android.tools.build", name = "gradle
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-hilt-common = { group = "androidx.hilt", name = "hilt-common", version.ref = "hiltCommon" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
