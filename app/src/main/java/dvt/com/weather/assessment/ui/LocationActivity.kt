@@ -20,7 +20,7 @@
 //import javax.inject.Inject
 //
 //
-//// This is an old way of handling permissions requests
+
 //@AndroidEntryPoint
 //abstract class LocationActivity : ComponentActivity() {
 //
