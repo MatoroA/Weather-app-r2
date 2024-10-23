@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dvt.com.weather.common.DvtDispatcher
 import dvt.com.weather.common.DvtDispatchers
+import dvt.com.weather.common.DvtDispatchers.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -25,6 +26,6 @@ object CoroutineScopesModule {
     @Provides
     @ApplicationScope
     fun providesCoroutineScope(
-        @DvtDispatcher(DvtDispatchers.Default) dispatcher: CoroutineDispatcher,
+        @DvtDispatcher(Default) dispatcher: CoroutineDispatcher,
     ): CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
 }
