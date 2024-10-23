@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.dvt.weather.android.library)
+    alias(libs.plugins.dvt.weather.hilt)
 }
 
 android {
@@ -12,5 +13,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.data)
 
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.work)
+    implementation(libs.androidx.work.runtime.ktx)
 }

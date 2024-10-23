@@ -1,4 +1,4 @@
-package dvt.com.weather.weather
+package dvt.com.weather.weather.worker
 
 import android.content.Context
 import androidx.hilt.work.HiltWorkerFactory
@@ -9,6 +9,7 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
+import dvt.com.weather.model.LocationCoordinates
 import java.lang.IllegalArgumentException
 import kotlin.reflect.KClass
 
@@ -21,11 +22,17 @@ interface HiltWorkerFactoryEntryPoint {
 
 
 const val WORKER_CLASS_NAME = "RouterWorkerDelegateClassName"
+const val LONGITUDE = "Longitude"
+const val LATITUDE = "latitude"
 
 
-fun KClass<out CoroutineWorker>.delegate() = Data.Builder()
-    .putString(WORKER_CLASS_NAME, qualifiedName)
-    .build()
+fun KClass<out CoroutineWorker>.delegate(coordinates: LocationCoordinates): Data =
+    Data.Builder()
+        .putString(WORKER_CLASS_NAME, qualifiedName)
+        .putDouble(LONGITUDE, coordinates.longitude)
+        .putDouble(LATITUDE, coordinates.latitude)
+        .putString(WORKER_CLASS_NAME, qualifiedName)
+        .build()
 
 class DelegateWork(
     private val appContext: Context,

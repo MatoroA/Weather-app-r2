@@ -1,6 +1,7 @@
 package dvt.com.weather.weather.worker
 
 import android.content.Context
+import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.Data
@@ -26,6 +27,8 @@ class WeatherWorker @AssistedInject constructor(
         val latitude = workerParameters.inputData.getDouble(LONGITUDE, 0.0)
         val longitude = workerParameters.inputData.getDouble(LATITUDE, 0.0)
 
+        Log.d(TAG, "doWork: longitude => $longitude, latitude => $latitude")
+
         val successful = weatherRepository.sync(LocationCoordinates(longitude, latitude))
 
         return if (successful) {
@@ -46,3 +49,5 @@ class WeatherWorker @AssistedInject constructor(
     }
 
 }
+
+const val TAG = "WeatherWorkerClass"
