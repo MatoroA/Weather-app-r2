@@ -12,26 +12,34 @@ import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import dvt.com.weather.data.repository.WeatherRepository
+import dvt.com.weather.data.util.Syncable
+import dvt.com.weather.data.util.Synchronizer
 import dvt.com.weather.model.LocationCoordinates
 import dvt.com.weather.weather.helpers.WeatherWorkerUtil.WeatherConstraint
+import kotlinx.coroutines.delay
 
 @HiltWorker
 class WeatherWorker @AssistedInject constructor(
     @Assisted val context: Context,
     @Assisted val workerParameters: WorkerParameters,
     private val weatherRepository: WeatherRepository,
-) : CoroutineWorker(context, workerParameters) {
+) : CoroutineWorker(context, workerParameters), Synchronizer {
 
     override suspend fun doWork(): Result {
 
-        val latitude = workerParameters.inputData.getDouble(LONGITUDE, 0.0)
-        val longitude = workerParameters.inputData.getDouble(LATITUDE, 0.0)
+        val latitude = workerParameters.inputData.getDouble(LATITUDE, 0.0)
+        val longitude = workerParameters.inputData.getDouble(LONGITUDE, 0.0)
 
         Log.d(TAG, "doWork: longitude => $longitude, latitude => $latitude")
 
-        val successful = weatherRepository.sync(LocationCoordinates(longitude, latitude))
+        val syncSuccessful = weatherRepository.sync(
+            LocationCoordinates(
+                latitude = latitude,
+                longitude = longitude
+            )
+        )
 
-        return if (successful) {
+        return if (syncSuccessful) {
             Result.success()
         } else {
             Result.failure()
