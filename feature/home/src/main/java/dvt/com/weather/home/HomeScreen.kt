@@ -110,14 +110,14 @@ fun HomeWeather(modifier: Modifier = Modifier, state: HomeUiState.Success) {
                 )
 
                 Column {
-                    if (state.location.city != null) {
-                        Text(
-                            text = state.location.city!!,
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Box(modifier = Modifier.height(10.dp))
-                    }
+//                    if (state.location.city != null) {
+//                        Text(
+//                            text = state.location.city!!,
+//                            style = MaterialTheme.typography.bodyLarge,
+//                            fontWeight = FontWeight.Bold
+//                        )
+//                        Box(modifier = Modifier.height(10.dp))
+//                    }
 
                     CurrentDayWeather(
                         title = current.weatherType.name,
@@ -237,7 +237,7 @@ private fun HomeWeatherPreview() {
     WeatherTheme {
         HomeWeather(
             state = HomeUiState.Success(
-                location = CurrentLocation(city = null, longitude = 0.0, latitude = 0.0),
+//                location = CurrentLocation(city = null, longitude = 0.0, latitude = 0.0),
                 current = CurrentWeather(
                     weather = emptyList(),
                     main = Main(

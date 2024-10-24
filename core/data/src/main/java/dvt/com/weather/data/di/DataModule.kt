@@ -11,7 +11,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dvt.com.weather.data.repository.WeatherRepository
-import dvt.com.weather.data.repository.WeatherRepositoryImpl
+import dvt.com.weather.data.repository.OfflineFirstWeatherRepositoryImpl
 import dvt.com.weather.data.util.LiveLocationManagerImpl
 import dvt.com.weather.data.util.LiveLocationManager
 import dvt.com.weather.data.util.LiveWeatherManager
@@ -34,7 +34,7 @@ interface DataModule {
     }
 
     @Binds
-    fun bindsWeatherRepository(impl: WeatherRepositoryImpl): WeatherRepository
+    fun bindsWeatherRepository(impl: OfflineFirstWeatherRepositoryImpl): WeatherRepository
 
     @Singleton
     @Binds
