@@ -24,6 +24,8 @@ secrets {
 }
 
 dependencies {
+    api(projects.core.model)
+
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.okhttp)
     implementation(libs.retrofit.converter.gson)
