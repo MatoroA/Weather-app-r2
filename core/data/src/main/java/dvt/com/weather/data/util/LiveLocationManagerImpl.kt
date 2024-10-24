@@ -51,9 +51,12 @@ class LiveLocationManagerImpl @Inject constructor(
         _location.value = location
     }
 
-    private fun Address.toCurrentLocation() = CurrentLocation(
-        city = adminArea,
-        longitude = longitude,
-        latitude = latitude,
-    )
+    private fun Address.toCurrentLocation(): CurrentLocation {
+        Log.d(TAG, "toCurrentLocation: longitude: $longitude, latitude: $latitude")
+        return CurrentLocation(
+            city = adminArea,
+            longitude = longitude,
+            latitude = latitude,
+        )
+    }
 }
