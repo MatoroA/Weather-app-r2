@@ -5,13 +5,11 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
-import android.renderscript.RenderScript
 import android.util.Log
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
-import com.google.android.gms.tasks.CancellationTokenSource
 import dvt.com.weather.model.CurrentLocation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
